@@ -1,4 +1,6 @@
-# Recursive decent with Pratt Parser (operator preference)
+# Recursive decent with Pratt parser (operator preference)
+# https://en.wikipedia.org/wiki/Recursive_descent_parser
+# https://en.wikipedia.org/wiki/Operator-precedence_parser 
 
 import std/[strutils]
 import lexer, ast, utils/[errors]
@@ -105,6 +107,7 @@ proc synchronize*(p: var Parser) =
             return
         else:
             p.advance()
+
 
 proc expect*(p: var Parser, kind: TokenKind, message: string): Token =
     ## Like consume but returns the consumed token for use
