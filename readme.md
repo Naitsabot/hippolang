@@ -8,9 +8,11 @@
 - Optimization: Always optimize, no opt-out
 - Embedded features: Interrupts, inline assembly, binary file inclusion
 
-all identifiers are treated as lowercase with underlines removed.
+All identifiers are treated as lowercase with underlines removed.
 
 ## Project Structure
+
+```
 hippo/
 ├── hippo.nimble          # Package file
 ├── src/
@@ -31,3 +33,4 @@ hippo/
 │   └── examples/
 │       └── simple.pg       # Test programs
 └── README.md
+```
