@@ -1,0 +1,25 @@
+# Nim compiled files
+nimcache/
+nimblecache/
+htmldocs/
+
+# Binary outputs
+hippo
+hippo.exe
+/bin/
+
+# Test executables (pattern-based)
+tests/test_*
+tests/*.exe
+!tests/*.nim
+
+# OS-specific
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
