@@ -110,7 +110,7 @@ TypeExpr :=
 ```
 VarDecl := 'var' Identifier ':' TypeExpr MemoryLocation? ('=' Expr)? 
 
-ConstDecl := 'const' Identifier (':' TypeExpr)? MemoryLocation? '=' Expr
+ConstDecl := 'const' Identifier ':' TypeExpr MemoryLocation? '=' Expr
 
 MemoryLocation := '@' MemoryRegion ':' IntLiteral
                 | '@' IntLiteral
@@ -247,7 +247,7 @@ ArrayLiteral := '[' (Expr (',' Expr)*)? ']'
 ## Semantic Rules
 
 ### Type System
-1. All variables must have explicit types or be inferrable from initialization
+1. All variables and constants must have explicit type annotations
 2. Integer types cannot be implicitly converted between sizes
 3. `bool` is distinct from integers
 4. Pointers are typed as `ptr` (untyped pointer)

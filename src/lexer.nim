@@ -136,7 +136,7 @@ proc initLexer*(source: string): Lexer =
 
 proc peek(lex: Lexer, offset = 0): char =
     ## Peeks at the next character in the source code without advancing the lexer.
-    let pos = lex.pos + offset
+    let pos: int = lex.pos + offset
     if pos < lex.source.len:
         result = lex.source[pos]
     else:
@@ -181,9 +181,9 @@ proc makeToken(lex: Lexer, kind: TokenKind, lexeme: string): Token =
 proc lexNumber(lex: var Lexer): Token =
     ## Lexes a numeric literal from the source code, 
     ## handling decimal, hexadecimal, and binary formats.
-    let startLine = lex.line
-    let startCol = lex.column
-    var lexeme = ""
+    let startLine: int = lex.line
+    let startCol: int = lex.column
+    var lexeme: string = ""
     
     # Check for hex (0x) or binary (0b)
     if lex.peek() == '0' and lex.peek(1) in {'x', 'X', 'b', 'B'}:
@@ -208,26 +208,26 @@ proc lexNumber(lex: var Lexer): Token =
 
 proc lexIdentifier(lex: var Lexer): Token =
     ## Lexes an identifier or keyword from the source code.
-    let startLine = lex.line
-    let startCol = lex.column
-    var lexeme = ""
+    let startLine: int = lex.line
+    let startCol: int = lex.column
+    var lexeme: string = ""
     
     while lex.peek() in IdentChars + Digits:
         lexeme.add lex.advance()
     
     # Normalize for keyword lookup
-    let normalized = normalizeIdent(lexeme)
+    let normalized: string = normalizeIdent(lexeme)
     # Check if it's a keyword
-    let kind = keywords.getOrDefault(normalized, tkIdent)
+    let kind: TokenKind = keywords.getOrDefault(normalized, tkIdent)
     # Keep original lexeme for display, but store normalized for comparison
     result = Token(kind: kind, lexeme: lexeme, normalized: normalized, line: startLine, column: startCol)
 
 
 proc lexString(lex: var Lexer): Token =
     ## Lexes a string literal from the source code, handling escape sequences.
-    let startLine = lex.line
-    let startCol = lex.column
-    var lexeme = ""
+    let startLine: int = lex.line
+    let startCol: int = lex.column
+    var lexeme: string = ""
     
     discard lex.advance()  # Opening "
     
@@ -267,9 +267,9 @@ proc nextToken*(lex: var Lexer): Token =
     if lex.peek() == '\0':
         return lex.makeToken(tkEof, "")
     
-    let startLine = lex.line
-    let startCol = lex.column
-    let c = lex.peek()
+    let startLine: int = lex.line
+    let startCol: int = lex.column
+    let c: char = lex.peek()
     
     # Numbers
     if c in Digits:
@@ -379,7 +379,7 @@ proc nextToken*(lex: var Lexer): Token =
 iterator tokens*(lex: var Lexer): Token =
     ## An iterator that yields all tokens from the source code until EOF is reached.
     while true:
-        let tok = lex.nextToken()
+        let tok: Token = lex.nextToken()
         yield tok
         if tok.kind == tkEof:
             break

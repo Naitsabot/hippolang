@@ -47,7 +47,7 @@ type
         nkPragma         # {.bank: 2.}
         nkHwRegister     # hw.lcdControl
     
-    Node* = object
+    Node* = ref object
         line*: int
         column*: int
         case kind*: NodeKind
@@ -58,13 +58,13 @@ type
 
         of nkVarDecl:
             varName*: string
-            varType*: Node
+            varType*: Node      # Not Optional, must have a type
             varLocation*: Node  # Optional memory location, can be nil
             varInit*: Node      # Optional initializer, can be nil
 
         of nkConstDecl:
             constName*: string
-            constType*: Node        # Can be nil, with type inference
+            constType*: Node        # Not Optional, must have a type
             constLocation*: Node    # Optional memory location, can be nil
             constValue*: Node
 
