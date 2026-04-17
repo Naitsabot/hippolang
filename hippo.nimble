@@ -16,5 +16,4 @@ requires "nim >= 2.0.0"
 # Tasks
 
 task test, "Run tests":
-    exec "nim c -r tests/test_lexer.nim"
-    exec "nim c -r tests/test_parser.nim"
+    exec "nim c -r tests/test_all.nim"
